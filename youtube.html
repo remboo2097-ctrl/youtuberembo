@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pemesanan Produk</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@500;700&display=swap');
+
+        :root {
+            --dark: #121212;
+            --light: #ffffff;
+            --gray: #333333;
+            --accent: #b0b0b0;
+            --primary-font: 'Montserrat', sans-serif;
+            --secondary-font: 'Roboto', sans-serif;
+        }
+
+        body {
+            font-family: var(--secondary-font);
+            background-color: #808080;
+            color: var(--light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+      .logo {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 60px; /* Ubah ukuran sesuai kebutuhan */
+      height: auto;
+    }
+
+        #timer {
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 50px 20px 30px;
+        }
+
+        .header h1 {
+            color:black;
+            font-family: var(--primary-font);
+            font-size: 2.5em;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 1em;
+            color: black;
+            margin-top: 10px;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: var(--gray);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: var(--primary-font);
+            font-weight: 700;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            background-color: var(--dark);
+            color: var(--light);
+            font-size: 1em;
+            font-family: var(--secondary-font);
+            box-sizing: border-box;
+        }
+
+        .form-group input::placeholder {
+            color: var(--accent);
+        }
+
+        /* Tombol */
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--light);
+            color: var(--dark);
+            border: none;
+            border-radius: 5px;
+            font-family: var(--primary-font);
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--accent);
+        }
+
+        /* QR Code & Info Pembayaran */
+        #payment-info {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #2a2a2a;
+        }
+
+        #payment-info h3 {
+            font-family: var(--primary-font);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        #qr-code img {
+            width: 200px;
+            height: 200px;
+            border: 5px solid var(--light);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        #payment-info p {
+            font-size: 0.9em;
+            color: var(--accent);
+        }
+
+    .link-button {
+      display: block;
+      margin: 15px auto;
+      padding: 15px 25px;
+      background-color: black;
+      color: whitesmoke;
+      text-decoration: none;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 400px;
+      font-size: 16px;
+    }
+    .link-button:hover {
+      background-color: #1182df;}
+
+    .link-cihuy:hover {
+      background-color: white;
+    }
+    .link-cihuy {
+      display: block;
+      margin: 15px auto;
+      padding: 15px 25px;
+      background-color: #909090;
+      color: whitesmoke;
+      text-decoration: none;
+      border-radius: 5px;
+      width: 60%;
+      max-width: 400px;
+      font-size: 16px;
+    }
+
+    /* Tombol hamburger - background putih, ikon hitam */
+    .hamburger {
+      font-size: 30px;
+      cursor: pointer;
+      padding: 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      color: #222;
+      z-index: 1001;
+      border-bottom-right-radius: 8px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #222;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      color: white;
+      z-index: 1000;
+    }
+
+    .sidebar a.closebtn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      text-decoration: none;
+      color: white;
+    }
+
+  
+
+        #confirm-wa-btn {
+            display: none;
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px 0px;
+            background-color: #25D366; /* Hijau WhatsApp */
+            color: var(--light);
+            border: none;
+            border-radius: 5px;
+            font-family: var(--primary-font);
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        #confirm-wa-btn:hover {
+            background-color: #1DA851;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1>Pesan Produk YouTube</h1>
+            <p>Pilih produk yang Anda inginkan dan selesaikan pembayaran.</p>
+        </div>
+    </header>
+
+  <!-- Tombol Hamburger -->
+  <div class="hamburger" onclick="toggleSidebar()">
+    &#9776;
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleSidebar()">&times;</a>
+    <a class="link-cihuy" href="https://rembostoree.netlify.app/" target="_blank">Kembali</a>
+  </div>
+
+    <main class="container">
+        <div class="form-container">
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="product-select">Pilih Produk:</label>
+                    <select id="product-select" required>
+                        <option value="">-- Pilih Produk --</option>
+                        <option value="YouTube|5000">FAMPLAN 1B (Rp 5.000)</option>
+                        <option value="YouTube|8000">FAMPLAN 2B (Rp 8.000)</option>
+                        <option value="YouTube|10000">INDPLAN 1B (Rp 10.000)</option>
+                        <option value="YouTube|12000">INDPLAN 2B (Rp 12.000)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Nama Lengkap:</label>
+                    <input type="text" id="name" placeholder="Masukkan nama Anda" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email YouTube:</label>
+                    <input type="email" id="email" placeholder="Masukkan email YouTube" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Nomor HP (WhatsApp):</label>
+                    <input type="tel" id="phone" placeholder="Contoh: 08123456789" required>
+                </div>
+                <button type="submit" class="btn-submit">Pesan Sekarang</button>
+            </form>
+
+<!-- Logo di pojok kanan atas -->
+  <img src="https://iili.io/KutKXun.png" alt="Logo" class="logo" />
+
+            <div id="payment-info">
+                <h3>Selesaikan Pembayaran</h3>
+                <p>Silakan lakukan pembayaran dengan memindai QR code di bawah ini dan masukan sesuai nominal harga produk</p>
+                <div id="timer">05:00</div>
+                <div id="qr-code">
+                    <img src="https://iili.io/KRjODjS.md.jpg" alt="QR Code Pembayaran">
+                </div>
+                <p>Setelah selesai, silakan konfirmasi pesanan Anda.</p>
+                <a id="confirm-wa-btn">Konfirmasi Pesanan</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar.style.width === "250px") {
+        sidebar.style.width = "0";
+      } else {
+        sidebar.style.width = "250px";
+      }
+    }
+
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderForm = document.getElementById('order-form');
+            const productSelect = document.getElementById('product-select');
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email'); // Tambahan baru untuk email
+            const phoneInput = document.getElementById('phone');
+            const paymentInfoDiv = document.getElementById('payment-info');
+            const confirmWaBtn = document.getElementById('confirm-wa-btn');
+
+            // Nomor WhatsApp Admin
+            const adminWaNumber = '6285355614545'; // GANTI dengan nomor WhatsApp admin Anda
+
+            orderForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Ambil data dari form
+                const selectedValue = productSelect.value;
+                if (!selectedValue) {
+                    alert('Mohon pilih produk terlebih dahulu.');
+                    return;
+                }
+
+    let totalSeconds = 5 * 60; // 5 menit = 300 detik
+
+    const timerElement = document.getElementById('timer');
+
+    function updateTimer() {
+      let minutes = Math.floor(totalSeconds / 60);
+      let seconds = totalSeconds % 60;
+
+      // Format menit dan detik supaya selalu 2 digit, misal 05:09
+      minutes = minutes < 10 ? '0' + minutes : minutes;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
+
+      timerElement.textContent = `${minutes}:${seconds}`;
+
+      if (totalSeconds > 0) {
+        totalSeconds--;
+      } else {
+        clearInterval(intervalId);
+        alert("Waktu Habis!");
+      }
+    }
+
+    // Update timer setiap 1 detik
+    updateTimer(); // tampilkan langsung saat load
+    const intervalId = setInterval(updateTimer, 1000);
+
+                const [productName, productPrice] = selectedValue.split('|');
+                const customerName = nameInput.value;
+                const customerEmail = emailInput.value; // Ambil nilai email
+                const customerPhone = phoneInput.value;
+
+                // Tampilkan info pembayaran
+                paymentInfoDiv.style.display = 'block';
+                confirmWaBtn.style.display = 'block';
+
+                // Buat pesan WhatsApp
+                // Perbarui pesan untuk menyertakan email
+                const message = `Halo min, saya ingin konfirmasi pesanan.
+*Nama:* ${customerName}
+*Email:* ${customerEmail}
+*Nomor HP:* ${customerPhone}
+*Produk:* ${productName}
+*Harga:* Rp ${productPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+
+Saya sudah melakukan pembayaran. Mohon diproses, terima kasih!`;
+
+                // URL WhatsApp
+                const whatsappUrl = `https://wa.me/${adminWaNumber}?text=${encodeURIComponent(message)}`;
+
+                // Atur link tombol konfirmasi
+                confirmWaBtn.href = whatsappUrl;
+
+                // Opsional: scroll ke bagian info pembayaran
+                paymentInfoDiv.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
